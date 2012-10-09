@@ -1,5 +1,14 @@
 <h1>Hello in my shop</h1>
 
+<h2>Categories:</h2>
+<ul>
+	<% @categories.each do |category| %>
+		<li><%= link_to category.name, category %></li>
+	<% end %>
+</ul>
+
+<br>
+
 <h2>Products:</h2>
 <ul>
 	<% @products.each do |product| %>

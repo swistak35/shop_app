@@ -1,5 +1,5 @@
 class ShopController < ApplicationController
 	def index
-		render text: "Witaj w moim sklepie."
+		@products = Product.all
 	end
 end

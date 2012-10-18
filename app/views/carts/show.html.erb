@@ -1,0 +1,27 @@
+<div class="span9">
+	<table class='table'>
+		<tr>
+			<th>Name</th>
+			<th>Quantity</th>
+			<th>Price</th>
+			<th>Total</th>
+			<th></th>
+		</tr>
+		<% current_order.items.each do |item| %>
+			<tr>
+				<td><%= item.product_name %></td>
+				<td><%= item.quantity %></td>
+				<td><%= item.price %>$</td>
+				<td><%= item.cost %>$</td>
+			</tr>
+		<% end %>
+		<tr>
+			<td colspan='3'></td>
+			<td><%= current_order.total_cost %>$</td>
+		</tr>
+	</table>
+
+	<p>
+
+	</p>
+</div>

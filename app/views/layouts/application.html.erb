@@ -14,9 +14,11 @@
 	    	<%= image_tag "logo.png" %>
 	    	<span>Tea shop</span>
     	</div>
+
       <div class='cart'>
-        <%= link_to "W koszyku znajduje się #{current_order.amount_of_items} produkt.", cart_path %>
+        <%= link_to "W koszyku znajduje się #{current_order.amount_of_items} produktów.", cart_path %>
       </div>
+
       <div class="well sidebar-nav">
         <ul class="nav nav-list">
           <li class="nav-header">Tea Shop</li>
@@ -30,7 +32,9 @@
       </div>
     </div>
 
-    <%= yield %>
+    <div class="span9">
+      <%= yield %>
+    </div>
   </div>
   <hr>
   <footer>

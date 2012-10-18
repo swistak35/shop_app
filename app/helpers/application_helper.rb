@@ -10,4 +10,8 @@ module ApplicationHelper
 	def current_order
 		current_buyer.current_order
 	end
+
+	def all_categories
+  	Category.all
+  end
 end

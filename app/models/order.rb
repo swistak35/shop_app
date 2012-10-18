@@ -9,6 +9,6 @@ class Order < ActiveRecord::Base
 	def total_cost
 		self.items.inject(0) do |sum, i|
 			sum += i.cost
-		end
+		end.round(2)
 	end
 end

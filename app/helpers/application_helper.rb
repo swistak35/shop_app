@@ -6,4 +6,8 @@ module ApplicationHelper
 			"none"
 		end
 	end
+
+	def current_order
+		current_buyer.current_order
+	end
 end

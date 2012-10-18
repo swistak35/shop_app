@@ -1,7 +1,8 @@
 <div class="span9">
   <div class="hero-unit">
     <h2><%= @product.name %></h2>
-    <h3>Price: <%= @product.price %></h3>
+    <h3>Price: <%= @product.price %>$</h3>
     <p><%= @product.desc %></p>
+    <%= button_to "Add to Cart", add_product_cart_path(id: @product.id), class: 'btn btn-info' %>
   </div>
 </div>

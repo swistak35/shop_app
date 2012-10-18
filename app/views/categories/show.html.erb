@@ -1,9 +1,13 @@
-<h2>Category: <%= @category.name %></h2>
-
-<ul>
-	<% @category.products.each do |product| %>
-		<li><%= link_to product.name, product %></li>
-	<% end %>
-</ul>
-
-<%= link_to "Back to main page", root_path %>
+<div class="span9">
+	<% @category.products.each_slice(4) do |products| %>
+	  <div class="row-fluid">
+	  	<% products.each do |product| %>
+		    <div class="span3">
+		      <h3><%= product.name %></h3>
+		      <p>Price: <%= product.price %></p>
+		      <p><%= link_to "View details", product, class: 'btn' %></p>
+		    </div>
+	    <% end %>
+	  </div>
+  <% end %>
+</div>

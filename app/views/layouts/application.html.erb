@@ -10,16 +10,17 @@
 <div class="container-fluid" id="main">
   <div class="row-fluid">
     <div class="span3">
+    	<div class='logo'>
+	    	<%= image_tag "logo.png" %>
+	    	<span>Tea shop</span>
+    	</div>
       <div class="well sidebar-nav">
         <ul class="nav nav-list">
           <li class="nav-header">Tea Shop</li>
           <li><%= link_to "Home", root_path %></li>
-          <li><a href="#">Link</a></li>
-          <li><a href="#">Link</a></li>
-          <li><a href="#">Link</a></li>
 
           <li class="nav-header">Categories</li>
-          <% @categories.each do |category| %>
+          <% all_categories.each do |category| %>
           	<li><%= link_to category.name, category %></li>
           <% end %>
         </ul>
@@ -31,6 +32,7 @@
   <hr>
   <footer>
     <p>&copy; Tea Shop 2012</p>
+    <p>Logo: <a href="http://findicons.com/icon/175720/diagram_v2_23">Jack Cai</a></p>
   </footer>
 </div>
 </body>

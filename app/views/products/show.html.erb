@@ -1,11 +1,7 @@
-<h2><%= @product.name %></h2>
-
-<h4>Price: <%= @product.price %></h4>
-
-<h4>Category: <%= link_to_category(@product) %>
-	
-<p>
-	<%= @product.desc %>
-</p>
-
-<%= link_to "Back to main page", root_path %>
+<div class="span9">
+  <div class="hero-unit">
+    <h2><%= @product.name %></h2>
+    <h3>Price: <%= @product.price %></h3>
+    <p><%= @product.desc %></p>
+  </div>
+</div>

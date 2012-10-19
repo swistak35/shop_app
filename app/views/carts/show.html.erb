@@ -5,7 +5,6 @@
 			<th>Quantity</th>
 			<th>Price</th>
 			<th>Total</th>
-			<th></th>
 		</tr>
 		<% current_order.items.each do |item| %>
 			<tr>
@@ -20,11 +19,12 @@
 			</tr>
 		<% end %>
 		<tr>
-			<td colspan='3'></td>
+			<td></td>
+			<td><%= f.submit "Update", class: 'btn btn-info' %></td>
+			<td></td>
 			<td><%= current_order.total_cost %>$</td>
 		</tr>
 	</table>
-
-	<%= f.submit "Update cart", class: 'btn btn-info' %>
-	<%= button_to "Proceed", root_path, class: 'btn btn-primary' %>
 <% end %>
+
+<%= button_to "Proceed to payment", payment_cart_path, method: :get, class: 'btn btn-primary' %>

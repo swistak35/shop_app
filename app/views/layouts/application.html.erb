@@ -33,6 +33,18 @@
     </div>
 
     <div class="span9">
+      <% if notice %>
+        <div class='alert alert-success'>
+          <%= notice %>
+        </div>
+      <% end %>
+
+      <% if alert %>
+        <div class='alert alert-warning'>
+          <%= alert %>
+        </div>
+      <% end %>
+
       <%= yield %>
     </div>
   </div>

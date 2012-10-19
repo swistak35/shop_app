@@ -10,4 +10,10 @@ class CartsController < ApplicationController
 			quantity: params[:quantity])
 		redirect_to :back, notice: "Product added to the cart."
 	end
+
+	def update
+		@order = current_buyer.current_order
+		@order.update_attributes(params[:order])
+		redirect_to :back, notice: "Cart updated successfully."
+	end
 end

@@ -1,5 +1,5 @@
 ShopApp::Application.routes.draw do
-	resource :cart, only: [:show] do
+	resource :cart, only: [:show, :update] do
 		post 'add_product'
 	end
 	resources :categories, only: [:show]

@@ -14,4 +14,15 @@ module ApplicationHelper
 	def all_categories
   	Category.all
   end
+
+  def basket_info(amount)
+  	case amount
+  		when 0
+  			"Cart is empty."
+  		when 1
+  			"There is 1 product in cart."
+  		else
+  			"There are #{amount} products in cart."
+  	end
+  end
 end

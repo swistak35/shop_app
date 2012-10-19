@@ -16,7 +16,7 @@
     	</div>
 
       <div class='cart'>
-        <%= link_to "W koszyku znajduje się #{current_order.amount_of_items} produktów.", cart_path %>
+        <%= link_to basket_info(current_order.amount_of_items), cart_path %>
       </div>
 
       <div class="well sidebar-nav">

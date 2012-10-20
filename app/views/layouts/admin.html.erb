@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ShopApp</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div class="container-fluid" id="main">
+  <div class="row-fluid">
+    <div class="span3">
+    	<div class='logo'>
+	    	<%= image_tag "logo.png" %>
+	    	<span>Tea shop</span>
+    	</div>
+
+      <div class='cart'>
+        <%= link_to basket_info(current_order.amount_of_items), cart_path %>
+      </div>
+
+      <div class="well sidebar-nav">
+        <ul class="nav nav-list">
+          <li class="nav-header">Tea Shop</li>
+          <li><%= link_to "Home", root_path %></li>
+
+          <li class="nav-header">Categories</li>
+          <% all_categories.each do |category| %>
+          	<li><%= link_to category.name, category %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+
+    <div class="span9">
+      <% if notice %>
+        <div class='alert alert-success'>
+          <%= notice %>
+        </div>
+      <% end %>
+
+      <% if alert %>
+        <div class='alert alert-warning'>
+          <%= alert %>
+        </div>
+      <% end %>
+
+      <%= yield %>
+    </div>
+  </div>
+  <hr>
+  <footer>
+    <p>&copy; Tea Shop 2012</p>
+    <p>Logo: <a href="http://findicons.com/icon/175720/diagram_v2_23">Jack Cai</a></p>
+  </footer>
+</div>
+</body>
+</html>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121019215849) do
+ActiveRecord::Schema.define(:version => 20121020001304) do
 
   create_table "addresses", :force => true do |t|
     t.integer  "order_id"
@@ -20,6 +20,21 @@ ActiveRecord::Schema.define(:version => 20121019215849) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "admins", :force => true do |t|
+    t.string   "email",               :default => "", :null => false
+    t.string   "encrypted_password",  :default => "", :null => false
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",       :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+  end
+
+  add_index "admins", ["email"], :name => "index_admins_on_email", :unique => true
 
   create_table "buyers", :force => true do |t|
     t.datetime "created_at", :null => false

@@ -1,4 +1,8 @@
 ShopApp::Application.routes.draw do
+	namespace :admin do
+	  devise_for :admins, :controllers => { :sessions => "admin/sessions" }
+	end
+
 	resource :cart, only: [:show, :update] do
 		post 'add_product'
 		get 'payment'

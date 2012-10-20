@@ -3,8 +3,8 @@ ShopApp::Application.routes.draw do
 	  devise_for :admins, :controllers => { :sessions => "admin/sessions" }
 
 	  resources :categories, except: [:new, :edit, :show]
+	  resources :products
 
-	  
 	  get "/", to: "admin#index"
 	end
 

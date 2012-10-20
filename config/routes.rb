@@ -2,6 +2,9 @@ ShopApp::Application.routes.draw do
 	namespace :admin do
 	  devise_for :admins, :controllers => { :sessions => "admin/sessions" }
 
+	  resources :categories, except: [:new, :edit, :show]
+
+	  
 	  get "/", to: "admin#index"
 	end
 

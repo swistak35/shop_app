@@ -1,0 +1,40 @@
+<% unless @category.errors.empty? %>
+	<div class='alert alert-error'>
+		Errors when tried to save category:
+		<ul>
+			<% @category.errors.full_messages.each do |msg| %>
+				<li><%= msg %></li>
+			<% end %>
+		</ul>
+	</div>
+<% end %>
+
+<h4>New category</h4>
+
+<%= form_for([:admin, @category], html: { class: 'form-inline' }) do |f| %>
+	<%= f.label :name, class: 'control-label' %>
+	<%= f.text_field :name, required: true %>
+	<%= f.submit "Create", class: 'btn btn-primary' %>
+<% end %>
+
+<h2>List of categories</h2>
+
+<table class='table table-striped'>
+	<tr>
+		<th>Name</th>
+		<th>Products</th>
+		<th>Update</th>
+		<th>Remove</th>
+	</tr>
+	<% @categories.each do |category| %>
+		<tr>
+			<%= form_for([:admin, category]) do |f| %>
+				<td><%= f.text_field :name, required: true %></td>
+				<td><%= category.products_count %></td>
+				<td><%= f.submit "Update", class: 'btn btn-info' %></td>
+				<td><%= link_to "Remove", [:admin, category], method: :delete, confirm: "Are you sure?", class: 'btn btn-danger' %></td>
+			<% end %>
+		</tr>
+	<% end %>
+</table>
+

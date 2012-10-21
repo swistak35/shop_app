@@ -4,10 +4,12 @@ class Product < ActiveRecord::Base
 	belongs_to :category
 	has_many :order_items
 
+	scope :sorted, lambda { order("name ASC") }
+
 	validates :name, :desc, :price, presence: true
 
 	validates :price, format: {
-		with: /\A\d+(\.\d{2})?\Z/,
-		message: "has invalid format. Format should be for ex. '3' or '13.45'."
+		with: /\A\d+\.\d{2}\Z/,
+		message: "has invalid format. Format should be for ex. '13.45'."
 	}
 end

@@ -1,0 +1,50 @@
+<h2>List of products</h2>
+
+<ul class='nav nav-tabs' id='productsTab'>
+	<% @categories.each do |category| %>
+		<li><%= link_to category.name, "#cat#{category.id}" %></li>
+	<% end %>
+	<li><%= link_to "blank category", "#catblank" %></li>
+</ul>
+
+<div class="tab-content">
+	<% @categories.each do |category| %>
+		<div class='tab-pane' id='cat<%= category.id %>'>
+			<table class='table table-striped'>
+				<tr>
+					<th>Name</th>
+					<th>Price</th>
+					<th>Edit</th>
+					<th>Remove</th>
+				</tr>
+				<% category.products.sorted.each do |product| %>
+					<tr>
+						<td><%= link_to product.name, [:admin, product] %></td>
+						<td><%= product.price %>$</td>
+						<td><%= link_to "Edit", edit_admin_product_path(product), class: 'btn btn-info' %></td>
+						<td><%= link_to "Remove", [:admin, product], method: :delete, class: 'btn btn-danger' %></td>
+					</tr>
+				<% end %>
+			</table>
+		</div>
+	<% end %>
+
+	<div class='tab-pane' id='catblank'>
+		<table class='table table-striped'>
+			<tr>
+				<th>Name</th>
+				<th>Price</th>
+				<th>Edit</th>
+				<th>Remove</th>
+			</tr>
+			<% @products_with_blank_category.each do |product| %>
+				<tr>
+					<td><%= link_to product.name, [:admin, product] %></td>
+					<td><%= product.price %>$</td>
+					<td><%= link_to "Edit", edit_admin_product_path(product), class: 'btn btn-info' %></td>
+					<td><%= link_to "Remove", [:admin, product], method: :delete, class: 'btn btn-danger' %></td>
+				</tr>
+			<% end %>
+		</table>
+	</div>
+</div>

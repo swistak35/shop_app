@@ -26,6 +26,7 @@ class Admin::CategoriesController < Admin::ApplicationController
 	def destroy
 		@category = Category.find(params[:id])
 		@category.destroy
+		Product.where(category_id: @category.id).update_all(category_id: nil)
 		redirect_to admin_categories_path, notice: "Category removed"
 	end
 

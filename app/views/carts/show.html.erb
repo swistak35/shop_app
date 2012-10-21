@@ -1,3 +1,5 @@
+<h2>Cart</h2>
+
 <%= form_for current_order, url: cart_url do |f| %>
 	<table class='table'>
 		<tr>
@@ -27,4 +29,6 @@
 	</table>
 <% end %>
 
-<%= button_to "Proceed to payment", payment_cart_path, method: :get, class: 'btn btn-primary' %>
+<% if current_order.amount_of_items > 0 %>
+	<%= button_to "Proceed to payment", payment_cart_path, method: :get, class: 'btn btn-primary' %>
+<% end %>

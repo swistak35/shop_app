@@ -1,6 +1,6 @@
 <h2>Cart</h2>
 
-<%= form_for current_order, url: cart_url do |f| %>
+<%= form_for @order, url: cart_url do |f| %>
 	<table class='table'>
 		<tr>
 			<th>Name</th>
@@ -8,7 +8,7 @@
 			<th>Price</th>
 			<th>Total</th>
 		</tr>
-		<% current_order.items.each do |item| %>
+		<% @order.items.each do |item| %>
 			<tr>
 				<td><%= link_to item.product_name, item.product %></td>
 				<td>
@@ -24,11 +24,11 @@
 			<td></td>
 			<td><%= f.submit "Update", class: 'btn btn-info' %></td>
 			<td></td>
-			<td><%= current_order.total_cost %>$</td>
+			<td><%= @order.total_cost %>$</td>
 		</tr>
 	</table>
 <% end %>
 
-<% if current_order.amount_of_items > 0 %>
+<% if @order.amount_of_items > 0 %>
 	<%= button_to "Proceed to payment", payment_cart_path, method: :get, class: 'btn btn-primary' %>
 <% end %>

@@ -1,18 +1,16 @@
 class CartsController < ApplicationController
+	before_filter :find_order
+	before_filter :check_amount_of_items, only: [:complete, :payment]
+	
 	def show
 	end
 
-	def payment
-		@order = current_buyer.current_order
-	end
-
 	def add_product
-		order = current_buyer.current_order
-		matching_items = order.items.where("order_items.product_id = ?", params[:id])
+		matching_items = @order.items.where("order_items.product_id = ?", params[:id])
 
 		if matching_items.empty?
 			product = Product.find(params[:id])
-			order.items.create(
+			@order.items.create(
 				product_id: product.id,
 				price: product.price,
 				quantity: params[:quantity])
@@ -27,21 +25,30 @@ class CartsController < ApplicationController
 	end
 
 	def update
-		order = current_buyer.current_order
-		order.update_attributes(params[:order])
+		@order.update_attributes(params[:order])
 		redirect_to :back, notice: "Cart updated successfully."
 	end
 
+	def payment
+	end
+
 	def complete
-		@order = current_buyer.current_order
-		if @order.amount_of_items.zero?
-			redirect_to cart_path, alert: "Your cart is empty."
-		end
-		
 		if @order.update_attributes(params[:order])
 			@order.complete!
 		else
 			render :payment
+		end
+	end
+
+	private
+
+	def find_order
+		@order = current_buyer.current_order
+	end
+
+	def check_amount_of_items
+		if @order.amount_of_items.zero?
+			redirect_to cart_path, alert: "Your cart is empty."
 		end
 	end
 end

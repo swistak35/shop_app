@@ -1,5 +1,5 @@
 class OrderItem < ActiveRecord::Base
-	attr_accessible :price, :product_id, :quantity
+	attr_accessible :price, :product_id, :quantity, :order_id
 
 	delegate :name, :desc, to: :product,
 					prefix: true, allow_nil: true

@@ -9,7 +9,7 @@ class Product < ActiveRecord::Base
 	validates :name, :desc, :price, presence: true
 
 	validates :price, format: {
-		with: /\A\d+\.\d{2}\Z/,
+		with: /\A\d+\.\d{2}\z/,
 		message: "has invalid format. Format should be for ex. '13.45'."
 	}
 end

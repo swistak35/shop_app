@@ -1,6 +1,6 @@
 class Admin::OrdersController < Admin::ApplicationController
 	def index
-		@orders = Order.completed
+		@orders = Order.completed.order("ordered_at DESC")
 	end
 
 	def show

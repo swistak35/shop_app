@@ -25,4 +25,8 @@ module ApplicationHelper
   			"There are #{amount} products in cart."
   	end
   end
+
+  def nice_datetime(datetime)
+    datetime.strftime("%d-%m-%Y %H:%M")
+  end
 end

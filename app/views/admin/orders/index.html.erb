@@ -10,7 +10,7 @@
 	<% @orders.each do |order| %>
 		<tr>
 			<td><%= order.id %></td>
-			<td><%= Time.now %></td>
+			<td><%= nice_datetime(order.ordered_at) %></td>
 			<td><%= order.amount_of_items %></td>
 			<td><%= link_to "Order info", [:admin, order] %></td>
 		</tr>

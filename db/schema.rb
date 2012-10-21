@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121020001304) do
+ActiveRecord::Schema.define(:version => 20121021183705) do
 
   create_table "addresses", :force => true do |t|
     t.integer  "order_id"
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(:version => 20121020001304) do
     t.boolean  "completed",  :default => false
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
+    t.datetime "ordered_at"
   end
 
   create_table "products", :force => true do |t|

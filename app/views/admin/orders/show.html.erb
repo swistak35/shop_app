@@ -1,5 +1,9 @@
 <h3>Order #<%= @order.id %></h3>
 
+<h4>
+	Date of order: <%= nice_datetime(@order.ordered_at) %>
+</h4>
+
 <h4>Products: </h4>
 
 <table class='table'>
@@ -11,7 +15,7 @@
 	</tr>
 	<% @order.items.each do |item| %>
 		<tr>
-			<td><%= link_to item.product_name, item.product %></td>
+			<td><%= link_to item.product_name, [:admin, item.product] %></td>
 			<td><%= item.quantity %></td>
 			<td><%= item.price %>$</td>
 			<td><%= item.cost %>$</td>

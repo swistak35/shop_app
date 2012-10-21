@@ -29,6 +29,7 @@ class Order < ActiveRecord::Base
 
 	def complete!
 		self.completed = true
+		self.ordered_at = Time.now
 		self.save
 	end
 end

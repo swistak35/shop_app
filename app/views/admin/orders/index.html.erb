@@ -1,0 +1,18 @@
+<h2>Orders</h2>
+
+<table class='table table-striped'>
+	<tr>
+		<th>#</th>
+		<th>Date of order</th>
+		<th>Amount of items</th>
+		<th>Order info</th>
+	</tr>
+	<% @orders.each do |order| %>
+		<tr>
+			<td><%= order.id %></td>
+			<td><%= Time.now %></td>
+			<td><%= order.amount_of_items %></td>
+			<td><%= link_to "Order info", [:admin, order] %></td>
+		</tr>
+	<% end %>
+</table>

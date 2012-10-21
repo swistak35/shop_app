@@ -6,6 +6,8 @@ class Order < ActiveRecord::Base
 
 	attr_accessible :items_attributes, :address_attributes
 
+	scope :completed, lambda { where(completed: true) }
+
 	accepts_nested_attributes_for :items
 	accepts_nested_attributes_for :address
 

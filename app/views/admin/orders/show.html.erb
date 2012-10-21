@@ -1,0 +1,34 @@
+<h3>Order #<%= @order.id %></h3>
+
+<h4>Products: </h4>
+
+<table class='table'>
+	<tr>
+		<th>Name</th>
+		<th>Quantity</th>
+		<th>Price</th>
+		<th>Total</th>
+	</tr>
+	<% @order.items.each do |item| %>
+		<tr>
+			<td><%= link_to item.product_name, item.product %></td>
+			<td><%= item.quantity %></td>
+			<td><%= item.price %>$</td>
+			<td><%= item.cost %>$</td>
+		</tr>
+	<% end %>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td><%= @order.total_cost %>$</td>
+	</tr>
+</table>
+
+<h4>Address: </h4>
+
+First name: <%= @order.address.first_name %><br>
+Last name: <%= @order.address.last_name %><br>
+
+<br>
+<%= link_to "Back", :back, class: 'btn btn-info' %>

@@ -1,4 +1,4 @@
-class Admin::CategoriesController < Admin::ApplicationController
+class Admin::CategoriesController < Admin::AdminController
 	before_filter :load_categories, except: [:destroy]
 
 	def index

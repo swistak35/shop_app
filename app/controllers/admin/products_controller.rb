@@ -1,4 +1,4 @@
-class Admin::ProductsController < Admin::ApplicationController
+class Admin::ProductsController < Admin::AdminController
 	def index
 		@categories = Category.sorted
 		@products_with_blank_category = Product.where("category_id IS NULL").sorted

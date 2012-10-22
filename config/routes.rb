@@ -6,7 +6,7 @@ ShopApp::Application.routes.draw do
 	  resources :products
 	  resources :orders, only: [:index, :show]
 
-	  get "/", to: "admin#index"
+	  get "/", to: "main#index"
 	end
 
 	resource :cart, only: [:show, :update] do

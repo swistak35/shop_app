@@ -1,4 +1,4 @@
-class CartsController < ApplicationController
+class CartsController < ShopController
 	before_filter :find_order
 	before_filter :check_amount_of_items, only: [:complete, :payment]
 	
@@ -6,21 +6,13 @@ class CartsController < ApplicationController
 	end
 
 	def add_product
-		matching_items = @order.items.where("order_items.product_id = ?", params[:id])
+		@product = Product.find(params[:id])
 
-		if matching_items.empty?
-			product = Product.find(params[:id])
-			@order.items.create(
-				product_id: product.id,
-				price: product.price,
-				quantity: params[:quantity])
-			flash[:notice] = "Product added to the cart."
-		else
-			order_item = matching_items.first
-			if order_item.increase_quantity_by(params[:quantity])
-				flash[:notice] = "Increased quantity of this product in the cart."
-			end
+		flash[:notice] = case @order.add_product(@product, params[:quantity])
+			when :added then "Product added to the cart."
+			when :amount_increased then "Increased quantity of this product in the cart."
 		end
+		
 		redirect_to :back
 	end
 

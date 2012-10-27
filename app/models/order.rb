@@ -32,4 +32,19 @@ class Order < ActiveRecord::Base
 		self.ordered_at = Time.now
 		self.save
 	end
+
+	def add_product(product, amount)
+		matching_items = items.where("order_items.product_id = ?", product.id)
+
+		if matching_items.empty?
+			items.create(
+				product_id: product.id,
+				price: product.price,
+				quantity: amount)
+			return :added
+		else
+			order_item = matching_items.first
+			return :amount_increased if order_item.increase_quantity_by(amount)
+		end
+	end
 end

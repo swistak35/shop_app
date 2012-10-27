@@ -1,11 +1,1 @@
-<% @category.products.each_slice(4) do |products| %>
-  <div class="row-fluid">
-  	<% products.each do |product| %>
-	    <div class="span3">
-	      <h3><%= product.name %></h3>
-	      <p>Price: <%= product.price %></p>
-	      <p><%= link_to "View details", product, class: 'btn' %></p>
-	    </div>
-    <% end %>
-  </div>
-<% end %>
+<%= render 'products/products', products: @category.products %>

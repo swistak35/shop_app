@@ -16,7 +16,9 @@ ShopApp::Application.routes.draw do
 	end
 
 	resources :categories, only: [:show]
-  resources :products, only: [:show]
+  resources :products, only: [:show] do
+  	get "search", on: :collection
+  end
   
   root to: "shop#index"
 end

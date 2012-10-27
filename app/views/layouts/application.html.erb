@@ -45,6 +45,21 @@
         </div>
       <% end %>
 
+      <div id='search'>
+        <%= search_form_for @search, url: search_products_path do |f| %>
+          <%= f.text_field :name_cont, placeholder: 'Search phrase' %>
+          <%= check_box_tag 'desc_search', true, params[:desc_search], class: 'inline' %>
+          Search also in description?
+          <br>
+          Price from
+          <%= f.text_field :price_gteq, class: 'input-small' %>
+          to
+          <%= f.text_field :price_lteq, class: 'input-small' %>
+          
+          <%= f.submit "Search", class: 'btn' %>
+        <% end %>
+      </div>
+
       <%= yield %>
     </div>
   </div>

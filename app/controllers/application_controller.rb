@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+  before_filter :initialize_search_object
 
   def current_buyer
     if cookies[:user_id].present?
@@ -11,4 +12,8 @@ class ApplicationController < ActionController::Base
     @current_buyer
   end
   helper_method :current_buyer
+
+  def initialize_search_object
+    @search = Product.search(params[:q])
+  end
 end

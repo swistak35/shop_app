@@ -8,6 +8,8 @@ gem 'rails', '3.2.5'
 gem 'pg'
 
 gem 'devise'
+gem 'faker'
+gem 'ransack'
 
 
 # Gems used only for assets and not required

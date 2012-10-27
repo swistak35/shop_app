@@ -41,4 +41,52 @@ namespace :extra do
 		puts "done."
 		puts "IMPORTANT! Clear your cookies, because they keep buyer_id, which isn't exist anymore. I know, it's a bug. Or maybe it's a feature."
 	end
+
+	desc "Add fake records"
+	task :fake_data => :environment do
+		# fake categories
+		print "Creating fake categories... "
+		10.times do
+			Category.create name: Faker::Lorem.words(2).join(' ').capitalize
+		end
+		puts "done."
+		
+		# fake products
+		print "Creating fake products... "
+		@categories = Category.all
+		100.times do
+			Product.create 	name: Faker::Lorem.words(4, true).join(' ').capitalize,
+											desc: Faker::Lorem.paragraphs(2).join(' '),
+											price: (rand(10000).to_f / 100),
+											category_id: @categories.sample.id
+		end
+		puts "done."
+		
+		# fake buyers & orders
+		print "Creating fake buyers & orders... "
+		@products = Product.all
+		40.times do
+			buyer = Buyer.create
+			# kazdy kupujący losowo 0..3 zamówień
+			amount_of_orders = rand(4)
+			amount_of_orders.times do
+				order = buyer.orders.create
+
+				amount_of_items = rand(12) + 1
+				amount_of_items.times do
+					order.add_product @products.sample, (rand(10) + 1)
+				end
+
+				order.create_address 	first_name: Faker::Name.first_name,
+															last_name: Faker::Name.last_name
+
+				if rand(3) > 0
+					order.complete!
+				end
+
+				order.save
+			end
+		end
+		puts "done."
+	end
 end

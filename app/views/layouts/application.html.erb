@@ -15,8 +15,15 @@
 	    	<span>Tea shop</span>
     	</div>
 
-      <div class='cart'>
-        <%= link_to basket_info(current_order.amount_of_items), cart_path %>
+      <div class='cart well'>
+        <span>
+          <%= link_to basket_info(current_order.amount_of_items), cart_path %>
+        </span>
+        <ul>
+          <% current_order.items.each do |item| %>
+            <li><%= link_to basket_li(item), item.product %></li>
+          <% end %>
+        </ul>
       </div>
 
       <div class="well sidebar-nav">

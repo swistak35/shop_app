@@ -10,10 +10,14 @@
 	}
 
 	.cart {
-		font-weight: bold;
-		font-size: 13pt;
-		text-align: center;
-		margin: 10px 0 10px;
+		span {
+			font-weight: bold;
+			font-size: 13pt;
+			margin: 10px auto 10px;
+		}
+		li {
+
+		}
 	}
 
 	#search input {

@@ -3,15 +3,17 @@ class ShopController < ApplicationController
 
   def current_buyer
     if cookies[:user_id].present?
-    	@current_buyer = Buyer.find(cookies[:user_id])
+      @current_buyer = Buyer.find(cookies[:user_id])
     else
-    	@current_buyer = Buyer.create
-    	cookies[:user_id] = { value: @current_buyer.id, expires: 1.week.from_now }
+      @current_buyer = Buyer.create
+      cookies[:user_id] = { value: @current_buyer.id, expires: 1.week.from_now }
     end
     @current_buyer
   end
   helper_method :current_buyer
 
+  private
+  
   def initialize_search_object
     @search = Product.search(params[:q])
   end

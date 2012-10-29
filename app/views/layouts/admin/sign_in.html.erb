@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ShopApp</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div class="container-fluid" id="main">
+  <div class="row-fluid">
+    <div class='span4'></div>
+    <div class="span4 well">
+      <% if notice %>
+        <div class='alert alert-success'>
+          <%= notice %>
+        </div>
+      <% end %>
+
+      <% if alert %>
+        <div class='alert alert-warning'>
+          <%= alert %>
+        </div>
+      <% end %>
+
+      <%= yield %>
+    </div>
+    <div class='span4'></div>
+  </div>
+</div>
+</body>
+</html>

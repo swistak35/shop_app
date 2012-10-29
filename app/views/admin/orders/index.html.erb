@@ -5,6 +5,7 @@
 		<th>#</th>
 		<th>Date of order</th>
 		<th>Amount of items</th>
+		<th>Total cost</th>
 		<th>Order info</th>
 	</tr>
 	<% @orders.each do |order| %>
@@ -12,6 +13,7 @@
 			<td><%= order.id %></td>
 			<td><%= nice_datetime(order.ordered_at) %></td>
 			<td><%= order.amount_of_items %></td>
+			<td><%= order.total_cost %>$</td>
 			<td><%= link_to "Order info", [:admin, order] %></td>
 		</tr>
 	<% end %>

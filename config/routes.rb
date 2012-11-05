@@ -20,5 +20,6 @@ ShopApp::Application.routes.draw do
   	get "search", on: :collection
   end
   
+  match "/first_spa", to: "home#first_spa"
   root to: "home#index"
 end

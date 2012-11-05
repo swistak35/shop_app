@@ -14,4 +14,3 @@
 //= require jquery_ujs
 //= bootstrap.min
 //= main
-//= require_tree .

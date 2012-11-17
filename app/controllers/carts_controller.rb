@@ -3,6 +3,10 @@ class CartsController < ShopController
 	before_filter :check_amount_of_items, only: [:complete, :payment]
 	
 	def show
+		respond_to do |format|
+			format.html
+			format.json { render json: current_buyer.current_order.to_json(include: :items) }
+		end
 	end
 
 	def add_product

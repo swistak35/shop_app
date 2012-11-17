@@ -15,10 +15,11 @@ ShopApp::Application.routes.draw do
 		put 'complete'
 	end
 
-	resources :categories, only: [:show]
-  resources :products, only: [:show] do
+	resources :categories, only: [:index, :show]
+  resources :products, only: [:index, :show] do
   	get "search", on: :collection
   end
   
+  get "/spa", to: "home#spa"
   root to: "home#index"
 end

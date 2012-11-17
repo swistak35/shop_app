@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ShopApp</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "spa" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <section id="main">
+  </section>
+
+  <script id="main-layout-template" type="text/x-handlebars-template">
+		<div class="container-fluid">
+		  <div class="row-fluid">
+		    <div class="span3">
+		    	<header class='logo'>
+			    	<%= image_tag "logo.png" %>
+			    	<span>Tea shop</span>
+		    	</header>
+
+		      <div class='cart well'>
+		        <span>
+		          <a href="#cart" id="cart-info"></a>
+		        </span>
+		        <ul class='cart'>
+		        </ul>
+		      </div>
+
+		      <div class="well sidebar-nav">
+		        <ul class="nav nav-list" id="menu">
+		          <li class="nav-header">Tea Shop</li>
+		          <li class='home'><a href="#home">Home</a></li>
+
+		          <li class="nav-header">Categories</li>
+		        </ul>
+		      </div>
+		    </div>
+
+		    <div class="span9">
+
+		      <div id='search'>
+		        SEARCH BOX
+		      </div>
+
+		      <div id="content">
+		      </div>
+		    </div>
+		  </div>
+		  <hr>
+		  <footer>
+		    <p>&copy; Tea Shop 2012</p>
+		    <p>Logo: <a href="http://findicons.com/icon/175720/diagram_v2_23">Jack Cai</a></p>
+		  </footer>
+		</div>
+  </script>
+
+  <script id="menu-category-template" type="text/x-handlebars-template">
+  	<li class='categoryShow' data-categoryid="{{ this.id }}">
+  		<a href="#category-{{ this.id }}">
+  			{{ this.name }}
+  		</a>
+  	</li>
+  </script>
+
+  <script id="home-page-template" type="text/x-handlebars-template">
+		<div class="hero-unit">
+		  <h2>Hello, guest!</h2>
+		  <p>Welcome in my shop. Look around for your favourite product, leave your money, and back for more.</p>
+		</div>
+  </script>
+
+  <script id="products-template" type="text/x-handlebars-template">
+  	{{#each slices}}
+		  <div class="row-fluid">
+		  	{{#each products}}
+			    <div class="span3">
+			      <h3>{{ this.name }}</h3>
+			      <p>Price: {{ this.price }}$</p>
+			      <p><a href="#productShow-{{this.id}}" data-productid="{{this.id}}" class='btn productShow'>View details</a></p>
+			    </div>
+		    {{/each}}
+		  </div>
+		{{/each}}
+  </script>
+
+  <script id="product-template" type="text/x-handlebars-template">
+		<div class="hero-unit">
+	  	<h2>{{ name }}</h2>
+	  	<h3>Price: {{ price }}$</h3>
+	  	<p>{{ desc}}</p>
+	  	<form class='form-inline'>
+	  		<input type="hidden" name="id" value="{{ id }}"/>
+	  		Quantity:
+	  		<input type="number" name="quantity" value="1" class="small_input"/>
+	  		<input type="submit" name="commit" value="Add to cart" class="btn btn-primary"/>
+	  	</form>
+	  	<a href="#back" class="btn btn-info">Back</a>
+		</div>
+	</script>
+
+	<script id="cart-info-template" type="text/x-handlebars-template">
+		{{#if amount_equal_to_zero }}
+			Cart is empty.
+		{{/if}}
+		{{#if amount_equal_to_one }}
+			There is 1 product in cart.
+		{{/if}}
+		{{#if amount_bigger_than_one }}
+			There are {{ amount }} products in cart.
+		{{/if}}
+	</script>
+</body>
+</html>

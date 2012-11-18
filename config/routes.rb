@@ -20,6 +20,6 @@ ShopApp::Application.routes.draw do
   	get "search", on: :collection
   end
   
-  get "/spa", to: "home#spa"
+  match "/spa(/*path)", to: "home#spa"
   root to: "home#index"
 end

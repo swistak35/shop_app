@@ -1,3 +1,8 @@
+################################
+########                ########
+#          SHOP GUI            #
+########                ########
+################################
 class ShopGui
 	constructor: ->
 
@@ -134,7 +139,11 @@ class ShopGui
 		context = { id: id }
 		$("#content").html @renderTemplate("completed-payment", context)
 
-
+################################
+########                ########
+#          USE CASE            #
+########                ########
+################################
 class BuyingProductsUseCase
 	constructor: ->
 		@categories = []
@@ -174,6 +183,11 @@ class BuyingProductsUseCase
 	completedPayment: (id)->
 	search: (name_cont, desc, price_from, price_to)->
 
+################################
+########                ########
+#         API STORAGE          #
+########                ########
+################################
 class ApiStorage
 	constructor: ->
 
@@ -244,6 +258,11 @@ class ApiStorage
 	paymentRejected: (warning)->
 	paymentCompleted: (id)->
 
+################################
+########                ########
+#       HISTORY GUARDIAN       #
+########                ########
+################################
 class HistoryGuardian
 	constructor: (@params)->
 		@initWindowPopStateFunction()
@@ -335,7 +354,11 @@ class HistoryGuardian
 					price_to ?= ""
 					useCase.search(name_cont, desc, price_from, price_to)
 
-
+################################
+########                ########
+#          SHOP GLUE           #
+########                ########
+################################
 class ShopGlue
 	constructor: (@useCase, @gui, @storage, @historyGuardian)->
 		Before(@useCase, 'initMainPage', => @storage.getCategories())
@@ -404,6 +427,11 @@ class ShopGlue
 		After(@useCase, 'completedPayment', (id)=> @gui.renderCompletedPayment(id))
 		After(@useCase, 'completedPayment', => @storage.getCart())
 
+################################
+########                ########
+#          SHOP APP            #
+########                ########
+################################
 class ShopApp
 	constructor: ->
 		useCase = new BuyingProductsUseCase()
@@ -416,6 +444,11 @@ class ShopApp
 		window.gui = gui #for debugging
 		useCase.initMainPage()
 
+################################
+########                ########
+#          ORDER ITEM          #
+########                ########
+################################
 class OrderItem
 	constructor: (@id, @price, @product_id, @quantity)->
 		@cost = @quantity * @price
@@ -430,6 +463,11 @@ class OrderItem
 	quantity_bigger_than_one: ->
 		@quantity > 1
 
+################################
+########                ########
+#            CART              #
+########                ########
+################################
 class Cart
 	constructor: ()->
 		@items = []
@@ -444,11 +482,26 @@ class Cart
 	calculate_total_cost: ->
 		@total_cost = @items.reduce ((sum, item)-> sum + item.price), 0
 
+################################
+########                ########
+#          CATEGORY            #
+########                ########
+################################
 class Category
 	constructor: (@id, @name) ->
 
+################################
+########                ########
+#           PRODUCT            #
+########                ########
+################################
 class Product
 	constructor: (@id, @name, @price, @desc, @category_id) ->
 
+################################
+########                ########
+#         INIT SCRIPT          #
+########                ########
+################################
 $(document).ready ()->
 	new ShopApp()

@@ -11,7 +11,6 @@ gem 'devise'
 gem 'faker'
 gem 'ransack'
 
-
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -28,6 +27,8 @@ gem 'jquery-rails'
 
 group :test, :development do
   gem "rspec-rails", "~> 2.0"
+  gem "bbq", :git => "git://github.com/drugpl/bbq"
+  gem "jasminerice"
 end
 
 # To use ActiveModel has_secure_password

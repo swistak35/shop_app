@@ -24,7 +24,7 @@ class @Cart
     @amount_of_items() > 0
 
   calculate_total_cost: ->
-    @total_cost = @items.reduce ((sum, item)-> sum + item.price), 0
+    @total_cost = @items.reduce ((sum, item)-> sum + item.cost), 0
 
 class @Category
   constructor: (@id, @name) ->

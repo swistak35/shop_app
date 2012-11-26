@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ShopApp</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= stylesheet_link_tag "jasmine" %>
+  <%= javascript_include_tag "spa_jasmine" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <script type="text/javascript">
+    (function() {
+      var jasmineEnv = jasmine.getEnv();
+      jasmineEnv.updateInterval = 1000;
+
+      var htmlReporter = new jasmine.HtmlReporter();
+
+      jasmineEnv.addReporter(htmlReporter);
+
+      jasmineEnv.specFilter = function(spec) {
+        return htmlReporter.specFilter(spec);
+      };
+
+      var currentWindowOnload = window.onload;
+
+      window.onload = function() {
+        if (currentWindowOnload) {
+          currentWindowOnload();
+        }
+        execJasmine();
+      };
+
+      function execJasmine() {
+        jasmineEnv.execute();
+      }
+
+    })();
+  </script>
+  
+  <section id="main" data-initpath='<%= params.to_json %>'>
+  </section>
+
+  <script id="main-layout-template" type="text/x-handlebars-template">
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span3">
+          <header class='logo'>
+            <%= image_tag "logo.png" %>
+            <span>Tea shop</span>
+          </header>
+
+          <div id='cart' class='cart well'>
+            <span>
+              <a href="#" id="cart-info"></a>
+            </span>
+            <ul id='cart-items'>
+            </ul>
+          </div>
+
+          <div class="well sidebar-nav">
+            <ul class="nav nav-list" id="menu">
+              <li class="nav-header">Tea Shop</li>
+              <li class='home'><a href="">Home</a></li>
+
+              <li class="nav-header">Categories</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="span9">
+          <div class='alert alert-success' id="notice" style='display: none;'>
+            <a href="#" class="close">×</a>
+            <span></span>
+          </div>
+          <div class='alert alert-warning' id="warning" style='display: none;'>
+            <a href="#" class="close">×</a>
+            <span></span>
+          </div>
+
+          <div>
+            <form accept-charset="UTF-8" id="search">
+              <input name="q_name_cont" placeholder="Search phrase" size="30" type="text" />
+              <input class="inline" name="desc_search" type="checkbox" value="true" />
+              Search also in description?
+              <br>
+              Price from
+              <input class="input-small" name="q_price_gteq" size="30" type="text" />
+              to
+              <input class="input-small" name="q_price_lteq" size="30" type="text" />
+              <input class="btn" name="commit" type="submit" value="Search" />
+            </form>
+          </div>
+
+          <div id="content">
+          </div>
+        </div>
+      </div>
+      <hr>
+      <footer>
+        <p>&copy; Tea Shop 2012</p>
+        <p>Logo: <a href="http://findicons.com/icon/175720/diagram_v2_23">Jack Cai</a></p>
+      </footer>
+    </div>
+  </script>
+
+  <script id="menu-category-template" type="text/x-handlebars-template">
+    <li class='categoryShow' data-categoryid="{{ this.id }}">
+      <a href="">
+        {{ this.name }}
+      </a>
+    </li>
+  </script>
+
+  <script id="home-page-template" type="text/x-handlebars-template">
+    <div class="hero-unit">
+      <h2>Hello, guest!</h2>
+      <p>Welcome in my shop. Look around for your favourite product, leave your money, and back for more.</p>
+    </div>
+  </script>
+
+  <script id="products-template" type="text/x-handlebars-template">
+    {{#each slices}}
+      <div class="row-fluid">
+        {{#each products}}
+          <div class="span3">
+            <h3>{{ this.name }}</h3>
+            <p>Price: {{ this.price }}$</p>
+            <p><a href="" data-productid="{{this.id}}" class='btn productShow'>View details</a></p>
+          </div>
+        {{/each}}
+      </div>
+    {{/each}}
+  </script>
+
+  <script id="product-template" type="text/x-handlebars-template">
+    <div class="hero-unit">
+      <h2>{{ name }}</h2>
+      <h3>Price: {{ price }}$</h3>
+      <p>{{ desc}}</p>
+      <form class='form-inline form-addProductToCart'>
+        <input type="hidden" name="id" value="{{ id }}"/>
+        Quantity:
+        <input type="number" name="quantity" value="1" class="small_input"/>
+        <input type="submit" name="commit" value="Add to cart" class="btn btn-primary"/>
+      </form>
+      <a href="" class="back-button btn btn-info">Back</a>
+    </div>
+  </script>
+
+  <script id="cart-info-template" type="text/x-handlebars-template">
+    {{#if amount_equal_to_zero }}
+      Cart is empty.
+    {{/if}}
+    {{#if amount_equal_to_one }}
+      There is 1 product in cart.
+    {{/if}}
+    {{#if amount_bigger_than_one }}
+      There are {{ amount }} products in cart.
+    {{/if}}
+  </script>
+
+  <script id="cart-items-template" type="text/x-handlebars-template">
+    {{#each items}}
+      <li>
+        <a href="" data-productid="{{ this.product_id }}" class='productShow'>
+          {{#if this.quantity_bigger_than_one }}
+            {{ this.quantity }}x 
+          {{/if}}
+          {{ this.product_name }}
+          {{#if this.quantity_bigger_than_one }}
+            ({{ this.price }}$ each)
+          {{else}}
+            ({{ this.price }})
+          {{/if}}
+        </a>
+      </li>
+    {{/each}}
+  </script>
+
+  <script id="cart-show-template" type="text/x-handlebars-template">
+    <form id="cartUpdate">
+      <table class='table'>
+        <tr>
+          <th>Name</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Total</th>
+        </tr>
+        {{#with items }}
+          {{#each this }}
+            <tr>
+              <td>
+                <a href="" data-productid="{{ this.product_id }}" class='productShow'>
+                  {{ this.product_name }}
+                </a>
+              </td>
+              <td>
+                <input class="small_input" name="order[items_attributes][{{ this.id }}][quantity]" size="30" type="text" value="{{ this.quantity }}" />
+                <input name="order[items_attributes][{{ this.id }}][id]" type="hidden" value="{{ this.id }}" />
+              </td>
+              <td>{{ this.price }}$</td>
+              <td>{{ this.cost }}$</td>
+            </tr>
+          {{/each}}
+        {{/with}}
+        <tr>
+          <td></td>
+          <td><input class="btn btn-info" name="commit" type="submit" value="Update" /></td>
+          <td></td>
+          <td>{{ total_cost }}$</td>
+        </tr>
+      </table>
+    </form>
+
+    {{#if amount_bigger_than_zero }}
+      <a href="" class='proceed btn btn-primary'>Proceed to payment</a>
+    {{/if}}
+  </script>
+
+  <script id="proceed-page-template" type="text/x-handlebars-template">
+    <h3>Total cost: {{ total_cost }}$</h3>
+    <form accept-charset="UTF-8" class="form-horizontal" id="proceedForm">  
+      <div class='control-group'>
+        <label class="control-label" for="order_address_attributes_first_name">First name</label>
+        <div class='controls'>
+          <input name="order[address_attributes][first_name]" required="required" size="30" type="text" />
+        </div>
+      </div>
+
+      <div class='control-group'>
+        <label class="control-label" for="order_address_attributes_last_name">Last name</label>
+        <div class='controls'>
+          <input name="order[address_attributes][last_name]" required="required" size="30" type="text" />
+        </div>
+      </div>
+      <input class="btn btn-primary" name="commit" type="submit" value="Complete order" />
+    </form>
+  </script>
+
+  <script id="completed-payment-template" type="text/x-handlebars-template">
+    <h2>Thank you.</h2>
+
+    <h4>No. of your order: #{{ id }}</h4>
+    <p>
+      We will realize your order tommorrow.
+      Have a nice day.
+    </p>
+  </script>
+</body>
+</html>

@@ -6,4 +6,8 @@ class HomeController < ShopController
 	def spa
 		render layout: false
 	end
+
+  def spa_jasmine
+    render layout: false
+  end
 end

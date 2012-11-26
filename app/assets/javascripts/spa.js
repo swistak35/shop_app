@@ -8,4 +8,10 @@
 //= require handlebars-1.0.rc.1
 //= require YouAreDaBomb
 //= require utils
+//= require shop_gui
+//= require shop_use_case
+//= require history_guardian
+//= require api_storage
+//= require shop_glue
+//= require models
 //= require shop_app

@@ -4,7 +4,9 @@ ShopApp::Application.routes.draw do
 
 	  resources :categories, except: [:new, :edit, :show]
 	  resources :products
-	  resources :orders, only: [:index, :show]
+	  resources :orders, only: [:index, :show] do
+      get "order_items", on: :collection
+    end
 
 	  get "/", to: "main#index"
 	end

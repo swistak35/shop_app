@@ -91,23 +91,23 @@ namespace :extra do
 	end
 end
 
-# 1000000.times do
-# buyer = Buyer.create
-# random_int = rand(31)
-# 
-# amount_of_orders = if random_int < 16
-# 	0
-# elsif random_int < 24
-# 	1
-# elsif random_int < 28
-# 	2
-# elsif random_int < 30
-# 	3
-# else
-# 	4
-# end
-# 
-# buyer.orders.create
-# 
-# amount_of_orders.times do
-# 	order = buyer.orders.create
+1000000.times do
+buyer = Buyer.create
+random_int = rand(31)
+
+amount_of_orders = if random_int < 16
+	0
+elsif random_int < 24
+	1
+elsif random_int < 28
+	2
+elsif random_int < 30
+	3
+else
+	4
+end
+
+buyer.orders.create
+
+amount_of_orders.times do
+	order = buyer.orders.create

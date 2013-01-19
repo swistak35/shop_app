@@ -1,0 +1,8 @@
+<div class="well sidebar-nav">
+  <ul class="nav nav-list">
+    <li class="nav-header">Top ten products</li>
+    <% @top_count.each do |product| %>
+      <li><%= link_to product[:name], product_path(product[:id]) %></li>
+    <% end %>
+  </ul>
+</div>

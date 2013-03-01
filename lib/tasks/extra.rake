@@ -7,18 +7,18 @@ namespace :extra do
 		admin.password = "adminqwerty"
 		admin.save
 		puts "done."
+		
+		# printf "Creating example categories... "
+		# Category.create(name: "Teas")
+		# Category.create(name: "Accessories")
+		# puts "done."
 
-		printf "Creating example categories... "
-		@cat_teas = Category.create(name: "Teas")
-		@cat_accessories = Category.create(name: "Accessories")
-		puts "done."
-
-		printf "Creating example products... "
-		Product.create(name: "Black tea", desc: "Tasty!", price: 9.99, category_id: @cat_teas.id)
-		Product.create(name: "Green tea", desc: "Healthy!", price: 14.99, category_id: @cat_teas.id)
-		Product.create(name: "Blue tea", desc: "Just kiddin'. Blue tea doesn't exist.", price: 29.49, category_id: @cat_teas.id)
-		Product.create(name: "Teaspoon", desc: "Wooden teaspoon", price: 2.99, category_id: @cat_accessories.id)
-		puts "done."
+		# printf "Creating example products... "
+		# Product.create(name: "Black tea", desc: "Tasty!", price: 9.99, category_id: @cat_teas.id)
+		# Product.create(name: "Green tea", desc: "Healthy!", price: 14.99, category_id: @cat_teas.id)
+		# Product.create(name: "Blue tea", desc: "Just kiddin'. Blue tea doesn't exist.", price: 29.49, category_id: @cat_teas.id)
+		# Product.create(name: "Teaspoon", desc: "Wooden teaspoon", price: 2.99, category_id: @cat_accessories.id)
+		# puts "done."
 
 		puts "-----------------------------"
 		puts "Setup finished!"
@@ -90,24 +90,3 @@ namespace :extra do
 		puts "done."
 	end
 end
-
-# 1000000.times do
-# buyer = Buyer.create
-# random_int = rand(31)
-# 
-# amount_of_orders = if random_int < 16
-# 	0
-# elsif random_int < 24
-# 	1
-# elsif random_int < 28
-# 	2
-# elsif random_int < 30
-# 	3
-# else
-# 	4
-# end
-# 
-# buyer.orders.create
-# 
-# amount_of_orders.times do
-# 	order = buyer.orders.create

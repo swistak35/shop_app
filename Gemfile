@@ -1,18 +1,12 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.5'
-
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
+gem 'rails', '~> 3.2.5'
 
 gem 'pg'
 
 gem 'devise'
 gem 'faker'
 gem 'ransack'
-
-gem 'cells'
-gem 'rspec-cells'
 
 # Gems used only for assets and not required
 # in production environments by default.

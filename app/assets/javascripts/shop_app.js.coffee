@@ -6,8 +6,6 @@ class @ShopApp
 		apiStorage = new ApiStorage()
 		historyGuardian = new HistoryGuardian($("#main").data("initpath"))
 		glue = new ShopGlue(useCase, gui, apiStorage, historyGuardian)
-		window.storage = apiStorage #for debugging
-		window.gui = gui #for debugging
 		useCase.initMainPage()
 
 $(document).ready ()->
